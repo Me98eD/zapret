@@ -1,0 +1,102 @@
+######################## Гос-сервисы ########################
+gosuslugi.ru
+gov.ru
+sudrf.ru
+nalog.ru
+mos.ru
+mos-gorsud.ru
+
+######################## Банки и магазины ########################
+rshb.ru
+vkusvill.ru
+
+######################## Российские сервисы ########################
+vk.com
+vk.ru
+kinopoisk.ru
+yandex.ru
+ya.ru
+
+######################## Google статика ########################
+gstatic.com
+
+######################## Steam ########################
+steampowered.com
+steamcommunity.com
+steamcdn.net
+steamstatic.com
+steamcontent.com
+
+######################## Epic Games ########################
+epicgames.com
+epicgamescdn.com
+easyanticheat.net
+fortnite.com
+unrealengine.com
+
+######################## Ubisoft ########################
+ubi.com
+ubisoft.com
+ubisoftconnect.com
+connect.ubisoft.com
+
+######################## PlayStation ########################
+playstation.com
+playstation.net
+account.sony.com
+psdownload.com
+ps5update.com
+sonyentertainmentnetwork.com
+
+######################## Twitch ########################
+twitch.tv
+ttvnw.net
+jtvnw.net
+twitchcdn.net
+
+######################## Hoyoverse ########################
+hoyolab.com
+hoyoverse.com
+genshinimpact.com
+zenlesszonezero.com
+
+######################## Xiaomi ########################
+mi.com
+miui.com
+xiaomi.com
+xiaomi.net
+mihome.com
+miwifi.com
+yeelight.com
+roborock.com
+dreamehome.com
+
+######################## Huawei ########################
+huawei.com
+huawei.ru
+huawei.net
+hicloud.com
+huaweicloud.com
+
+######################## Samsung ########################
+samsungosp.com
+samsungcloudsolution.com
+
+######################## Microsoft ########################
+microsoft.com
+windows.net
+office.com
+office365.com
+live.com
+xboxlive.com
+windowsupdate.com
+microsoftonline.com
+microsoftonline-p.com
+minecraftservices.com
+
+######################## Okko ########################
+okko.tv
+
+######################## Beeline ########################
+beeline.ru
+beeline.tv

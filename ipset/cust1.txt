@@ -1,0 +1,20 @@
+instagram.com
+i.instagram.com
+graph.instagram.com
+
+facebook.com
+graph.facebook.com
+graph-fallback.facebook.com
+edge-mqtt.facebook.com
+gateway.facebook.com
+web.facebook.com
+m.facebook.com
+
+fbcdn.net
+cdninstagram.com
+igcdn.com
+
+# CDN медиа
+scontent.cdninstagram.com
+scontent.xx.fbcdn.net
+video.xx.fbcdn.net

@@ -1,0 +1,6 @@
+*.log
+*.pid
+tmp/
+cache/
+nfq/
+autohostlist/
