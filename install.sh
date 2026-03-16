@@ -79,7 +79,7 @@ replace_simple_var() {
 replace_multiline_var() {
     FILE="$1"
     VAR="$2"
-    VALUE_FILE="$3"
+    VALUE_FILE="$3" 
 
     awk -v var="$VAR" -v valfile="$VALUE_FILE" '
     BEGIN {
