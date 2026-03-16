@@ -13,7 +13,7 @@ command -v git >/dev/null || {
 # задаём identity если не задан
 git config user.name >/dev/null 2>&1 || git config user.name "Me98eD"
 git config user.email >/dev/null 2>&1 || git config user.email "fmi8@yandex.ru"
-
+1
 git add -A
 
 if ! git diff --cached --quiet; then
