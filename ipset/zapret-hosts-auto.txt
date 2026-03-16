@@ -1,1 +1,2 @@
 play.google.com
+www.google.com

@@ -76,7 +76,7 @@ replace_simple_var() {
     fi
 }
 
-replace_multiline_var() {
+replace_var_as_singleline() {
     FILE="$1"
     VAR="$2"
     VALUE_FILE="$3"
@@ -86,11 +86,15 @@ replace_multiline_var() {
         value = ""
         skip = 0
         inserted = 0
+
         while ((getline line < valfile) > 0) {
-            value = value line "\n"
+            gsub(/^[[:space:]]+|[[:space:]]+$/, "", line)
+            if (line != "") {
+                if (value != "") value = value " "
+                value = value line
+            }
         }
         close(valfile)
-        sub(/\n$/, "", value)
     }
 
     {
@@ -103,15 +107,16 @@ replace_multiline_var() {
 
         if ($0 ~ ("^" var "=")) {
             if (!inserted) {
-                print var "=\""
-                if (length(value) > 0) print value
-                print "\""
+                print var "=\"" value "\""
                 inserted = 1
             }
 
+            # если старое значение было многострочным:
+            # VAR="
             if ($0 ~ ("^" var "=\"$")) {
                 skip = 1
             }
+
             next
         }
 
@@ -121,9 +126,7 @@ replace_multiline_var() {
     END {
         if (!inserted) {
             print ""
-            print var "=\""
-            if (length(value) > 0) print value
-            print "\""
+            print var "=\"" value "\""
         }
     }' "$FILE" > "$FILE.tmp" && mv "$FILE.tmp" "$FILE"
 }
