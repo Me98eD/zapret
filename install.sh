@@ -83,36 +83,43 @@ replace_multiline_var() {
 
     awk -v var="$VAR" -v valfile="$VALUE_FILE" '
     BEGIN {
-        in_block = 0
-        replaced = 0
         value = ""
+        skip = 0
+        inserted = 0
         while ((getline line < valfile) > 0) {
             value = value line "\n"
         }
         close(valfile)
         sub(/\n$/, "", value)
     }
+
     {
-        if (!replaced && $0 ~ ("^" var "=\"$")) {
-            print var "=\""
-            if (length(value) > 0) print value
-            print "\""
-            in_block = 1
-            replaced = 1
+        if (skip) {
+            if ($0 == "\"") {
+                skip = 0
+            }
             next
         }
 
-        if (in_block) {
-            if ($0 == "\"") {
-                in_block = 0
+        if ($0 ~ ("^" var "=")) {
+            if (!inserted) {
+                print var "=\""
+                if (length(value) > 0) print value
+                print "\""
+                inserted = 1
+            }
+
+            if ($0 ~ ("^" var "=\"$")) {
+                skip = 1
             }
             next
         }
 
         print
     }
+
     END {
-        if (!replaced) {
+        if (!inserted) {
             print ""
             print var "=\""
             if (length(value) > 0) print value
