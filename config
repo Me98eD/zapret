@@ -82,16 +82,16 @@ TPWS_OPT="--filter-tcp=80 --methodeol <HOSTLIST> --new --filter-tcp=443 --split-
 NFQWS_ENABLE=1
 
 # redirect outgoing traffic with connbytes limiter applied in both directions.
-NFQWS_PORTS_TCP="80,443,2053,2083,2087,2096,8443"
-NFQWS_PORTS_UDP="443,3478-3497,19294-19344,50000-50100"
+NFQWS_PORTS_TCP=80,443,2053,2083,2087,2096,8443
+NFQWS_PORTS_UDP=443,3478-3497,19294-19344,50000-50100
 
 # PKT_OUT means connbytes dir original
 # PKT_IN means connbytes dir reply
 # this is --dpi-desync-cutoff=nX kernel mode implementation for linux. it saves a lot of CPU.
-NFQWS_TCP_PKT_OUT="6"
-NFQWS_TCP_PKT_IN="3"
-NFQWS_UDP_PKT_OUT="6"
-NFQWS_UDP_PKT_IN="0"
+NFQWS_TCP_PKT_OUT=6
+NFQWS_TCP_PKT_IN=3
+NFQWS_UDP_PKT_OUT=6
+NFQWS_UDP_PKT_IN=0
 
 # redirect outgoing traffic without connbytes limiter and incoming with connbytes limiter
 # normally it's needed only for stateless DPI that matches every packet in a single TCP session
@@ -157,3 +157,7 @@ FILTER_TTL_EXPIRED_ICMP=1
 DAEMON_LOG_ENABLE=0
 DAEMON_LOG_SIZE_MAX=500
 DAEMON_LOG_FILE="/tmp/zapret+<DAEMON_NAME>+<DAEMON_IDNUM>+<DAEMON_CFGNAME>.log"
+
+NFQWS_OPT="
+  --filter-tcp=80,443,2053,2083,2087,2096,8443 --filter-udp=443,3478-3497,50000-50100 --hostlist=/opt/zapret/ipset/zapret-hosts-user-exclude.txt   --new --filter-tcp=80,443 --hostlist=/opt/zapret/ipset/cust3.txt --ip-id=zero --dpi-desync=fake,multisplit --dpi-desync-split-seqovl=681 --dpi-desync-split-pos=1 --dpi-desync-fooling=ts --dpi-desync-repeats=10 --dpi-desync-split-seqovl-pattern=/opt/zapret/files/fake/tls_clienthello_www_google_com.bin --dpi-desync-fake-tls-mod=rnd,dupsid,sni=www.google.com  --new --filter-udp=443 --hostlist=/opt/zapret/ipset/cust3.txt --dpi-desync=fake --dpi-desync-repeats=6 --dpi-desync-fake-quic=/opt/zapret/files/fake/quic_initial_www_google_com.bin   --new --filter-udp=443 --hostlist=/opt/zapret/ipset/zapret-hosts-google.txt --dpi-desync=fake --dpi-desync-fake-quic=/opt/zapret/files/fake/quic_initial_www_google_com.bin --dpi-desync-repeats=4  --new --filter-tcp=443 --hostlist=/opt/zapret/ipset/zapret-hosts-google.txt --ip-id=zero --dpi-desync=fake,multisplit --dpi-desync-split-seqovl=681 --dpi-desync-split-pos=1 --dpi-desync-fooling=ts --dpi-desync-repeats=8 --dpi-desync-split-seqovl-pattern=/opt/zapret/files/fake/tls_clienthello_www_google_com.bin --dpi-desync-fake-tls-mod=rnd,dupsid,sni=www.google.com   --new --filter-tcp=80,443,5222 --hostlist=/opt/zapret/ipset/cust1.txt --ip-id=zero --dpi-desync=fake,multisplit --dpi-desync-fooling=ts --dpi-desync-repeats=8 --dpi-desync-split-pos=1 --dpi-desync-fake-tls=/opt/zapret/files/fake/tls_clienthello_www_google_com.bin --dpi-desync-fake-tls-mod=rnd,dupsid,sni=www.google.com  --new --filter-udp=443 --hostlist=/opt/zapret/ipset/cust1.txt --dpi-desync=fake --dpi-desync-repeats=8 --dpi-desync-fake-quic=/opt/zapret/files/fake/quic_initial_www_google_com.bin   --new --filter-tcp=443 --hostlist=/opt/zapret/ipset/cust2.txt --dpi-desync=fake,multisplit --dpi-desync-split-seqovl=681 --dpi-desync-split-pos=1 --dpi-desync-fooling=ts --dpi-desync-repeats=8 --dpi-desync-split-seqovl-pattern=/opt/zapret/files/fake/tls_clienthello_www_google_com.bin --dpi-desync-fake-tls-mod=rnd,dupsid,sni=www.google.com  --new --filter-udp=19294-19344,50000-50100 --filter-l7=discord,stun --dpi-desync=fake --dpi-desync-fake-discord=/opt/zapret/files/fake/quic_initial_www_google_com.bin --dpi-desync-fake-stun=/opt/zapret/files/fake/quic_initial_www_google_com.bin --dpi-desync-repeats=6  --new --filter-tcp=2053,2083,2087,2096,8443 --hostlist-domains=discord.media --dpi-desync=fake,multisplit --dpi-desync-split-seqovl=681 --dpi-desync-split-pos=1 --dpi-desync-fooling=ts --dpi-desync-repeats=8 --dpi-desync-split-seqovl-pattern=/opt/zapret/files/fake/tls_clienthello_www_google_com.bin --dpi-desync-fake-tls-mod=rnd,dupsid,sni=www.google.com   --new --filter-tcp=80,443 <HOSTLIST> --ip-id=zero --dpi-desync=fake,multisplit --dpi-desync-split-seqovl=681 --dpi-desync-split-pos=1 --dpi-desync-fooling=ts --dpi-desync-repeats=10 --dpi-desync-split-seqovl-pattern=/opt/zapret/files/fake/tls_clienthello_www_google_com.bin --dpi-desync-fake-tls-mod=rnd,dupsid,sni=www.google.com  --new --filter-udp=443 <HOSTLIST_NOAUTO> --dpi-desync=fake --dpi-desync-repeats=6 --dpi-desync-fake-quic=/opt/zapret/files/fake/quic_initial_www_google_com.bin
+"

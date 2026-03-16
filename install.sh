@@ -189,7 +189,7 @@ prune_old_backups() {
     done
 }
 
-[ -d "$ZAPRET_DIR" ] || fail "Каталог $ZAPRET_DIR не найден. Сначала установи zapret."
+[ -d "$ZAPRET_DIR" ] || fail "Каталог $ZAPRET_DIR не найден. Сначала установите zapret."
 [ -f "$TARGET_CONFIG" ] || fail "Файл $TARGET_CONFIG не найден."
 
 rm -rf "$TMP_BASE"
@@ -200,11 +200,14 @@ ARCHIVE_URL="https://codeload.github.com/${REPO_OWNER}/${REPO_NAME}/tar.gz/refs/
 log "Скачиваю архив репозитория..."
 download_file "$ARCHIVE_URL" "$ARCHIVE"
 
-log "Распаковываю..."
-tar -xzf "$ARCHIVE" -C "$TMP_BASE"
+log "Проверяю архив..."
+tar -tzf "$ARCHIVE" >/dev/null 2>&1 || fail "Архив GitHub повреждён или скачан не полностью"
 
 SRC_ROOT_NAME=$(tar -tzf "$ARCHIVE" 2>/dev/null | head -n 1 | cut -d/ -f1)
 [ -n "$SRC_ROOT_NAME" ] || fail "Не удалось определить корневой каталог архива"
+
+log "Распаковываю..."
+tar -xzf "$ARCHIVE" -C "$TMP_BASE"
 
 SRC_ROOT="$TMP_BASE/$SRC_ROOT_NAME"
 [ -d "$SRC_ROOT" ] || fail "Не найден распакованный каталог репозитория: $SRC_ROOT"
