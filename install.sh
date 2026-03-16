@@ -9,7 +9,7 @@ REPO_BRANCH="main"
 ZAPRET_DIR="/opt/zapret"
 TARGET_CONFIG="$ZAPRET_DIR/config"
 
-TMP_BASE="/tmp/zapret-github-sync"
+TMP_BASE="/opt/zapret-github-sync.tmp"
 ARCHIVE="$TMP_BASE/repo.tar.gz"
 
 BACKUP_ROOT="/opt"
@@ -203,8 +203,11 @@ download_file "$ARCHIVE_URL" "$ARCHIVE"
 log "Распаковываю..."
 tar -xzf "$ARCHIVE" -C "$TMP_BASE"
 
-SRC_ROOT=$(find "$TMP_BASE" -maxdepth 1 -type d -name "${REPO_NAME}-*" | head -n 1)
-[ -n "$SRC_ROOT" ] || fail "Не удалось найти распакованный каталог репозитория"
+SRC_ROOT_NAME=$(tar -tzf "$ARCHIVE" 2>/dev/null | head -n 1 | cut -d/ -f1)
+[ -n "$SRC_ROOT_NAME" ] || fail "Не удалось определить корневой каталог архива"
+
+SRC_ROOT="$TMP_BASE/$SRC_ROOT_NAME"
+[ -d "$SRC_ROOT" ] || fail "Не найден распакованный каталог репозитория: $SRC_ROOT"
 
 [ -r "$SRC_ROOT/config" ] || fail "В репозитории нет читаемого файла config"
 [ -d "$SRC_ROOT/ipset" ] || fail "В репозитории нет папки ipset"
