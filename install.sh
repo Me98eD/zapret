@@ -76,7 +76,7 @@ replace_simple_var() {
     fi
 }
 
-replace_var_as_singleline() {
+replace_multiline_var() {
     FILE="$1"
     VAR="$2"
     VALUE_FILE="$3"
