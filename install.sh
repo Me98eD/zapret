@@ -159,7 +159,7 @@ restart_zapret() {
     fi
 
     if ls /opt/etc/init.d/S*zapret >/dev/null 2>&1; then
-        ZINIT=$(ls /opt/etc/init.d/S*zapret | head -n 1)
+        ZINIT=$(ls /opt/zapret/init.d/S*zapret | head -n 1)
         log "Перезапускаю zapret ($ZINIT)..."
         "$ZINIT" restart && return 0
         return 1
