@@ -16,6 +16,7 @@ vk.ru
 kinopoisk.ru
 yandex.ru
 ya.ru
+trip.com
 
 ######################## Google статика ########################
 gstatic.com
@@ -100,25 +101,3 @@ okko.tv
 ######################## Beeline ########################
 beeline.ru
 beeline.tv
-
-######################## Telegram ########################
-cdn-telegram.org
-comments.app
-contest.com
-fragment.com
-graph.org
-quiz.directory
-t.me
-tdesktop.com
-telega.one
-telegra.ph
-telegram-cdn.org
-telegram.dog
-telegram.me
-telegram.org
-telegram.space
-telesco.pe
-tg.dev
-ton.org
-tx.me
-usercontent.dev
