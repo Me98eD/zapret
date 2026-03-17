@@ -158,10 +158,15 @@ restart_zapret() {
         return 1
     fi
 
-    if ls /opt/etc/init.d/S*zapret >/dev/null 2>&1; then
-        ZINIT=$(ls /opt/etc/init.d/S*zapret | head -n 1)
-        log "Перезапускаю zapret ($ZINIT)..."
-        "$ZINIT" restart && return 0
+    if [ -f /opt/zapret/init.d/sysv/zapret ]; then
+        log "Перезапускаю zapret (Zyxel/sysv)..."
+        sh /opt/zapret/init.d/sysv/zapret restart && return 0
+        return 1
+    fi
+
+    if [ -x /opt/zapret/init.d/sysv/zapret ]; then
+        log "Перезапускаю zapret (Zyxel/sysv)..."
+        /opt/zapret/init.d/sysv/zapret restart && return 0
         return 1
     fi
 
