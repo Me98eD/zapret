@@ -290,7 +290,16 @@ replace_multiline_var "$TARGET_CONFIG" "NFQWS_OPT" "$TMP_BASE/NFQWS_OPT.value"
 
 sync
 
-if ! restart_zapret; then
+RC=0
+restart_zapret || RC=$?
+
+log "Код restart_zapret: $RC"
+
+if [ "$RC" -eq 2 ]; then
+    fail "Не найден способ запуска zapret на этой системе"
+fi
+
+if [ "$RC" -ne 0 ]; then
     restore_full_backup
 fi
 
