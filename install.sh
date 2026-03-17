@@ -159,7 +159,7 @@ restart_zapret() {
     fi
 
     if ls /opt/etc/init.d/S*zapret >/dev/null 2>&1; then
-        ZINIT=$(ls /opt/zapret/init.d/S*zapret | head -n 1)
+        ZINIT=$(ls /opt/etc/init.d/S*zapret | head -n 1)
         log "Перезапускаю zapret ($ZINIT)..."
         "$ZINIT" restart && return 0
         return 1
@@ -271,11 +271,6 @@ for f in $IPSET_FILES; do
     fi
 done
 
-log "Очищаю и обновляю custom.d из init.d/openwrt/custom.d ..."
-clean_dir_contents "$CUSTOM_D_TARGET"
-cp -a "$SRC_ROOT/init.d/openwrt/custom.d/." "$CUSTOM_D_TARGET/"
-find "$CUSTOM_D_TARGET" -type f -name '*.sh' -exec chmod 755 {} \;
-
 log "Обновляю параметры config ..."
 replace_simple_var "$TARGET_CONFIG" "NFQWS_PORTS_TCP" "$NFQWS_PORTS_TCP"
 replace_simple_var "$TARGET_CONFIG" "NFQWS_PORTS_UDP" "$NFQWS_PORTS_UDP"
@@ -284,7 +279,6 @@ replace_simple_var "$TARGET_CONFIG" "NFQWS_TCP_PKT_IN" "$NFQWS_TCP_PKT_IN"
 replace_simple_var "$TARGET_CONFIG" "NFQWS_UDP_PKT_OUT" "$NFQWS_UDP_PKT_OUT"
 replace_simple_var "$TARGET_CONFIG" "NFQWS_UDP_PKT_IN" "$NFQWS_UDP_PKT_IN"
 replace_simple_var "$TARGET_CONFIG" "DISABLE_IPV6" "$DISABLE_IPV6"
-replace_simple_var "$TARGET_CONFIG" "DISABLE_CUSTOM" "$DISABLE_CUSTOM"
 
 printf '%s\n' "$NFQWS_OPT" > "$TMP_BASE/NFQWS_OPT.value"
 replace_multiline_var "$TARGET_CONFIG" "NFQWS_OPT" "$TMP_BASE/NFQWS_OPT.value"
